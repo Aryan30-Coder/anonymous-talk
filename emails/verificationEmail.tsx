@@ -31,6 +31,8 @@ export default function VerificationEmail({ username, otp }: VerificationEmailPr
           fontStyle="normal"
         />
       </Head>
+      <body>
+
       <Preview>Here&apos;s your verification code: {otp}</Preview>
       <Section>
         <Row>
@@ -50,15 +52,8 @@ export default function VerificationEmail({ username, otp }: VerificationEmailPr
             If you did not request this code, please ignore this email.
           </Text>
         </Row>
-        {/* <Row>
-          <Button
-            href={`http://localhost:3000/verify/${username}`}
-            style={{ color: '#61dafb' }}
-          >
-            Verify here
-          </Button>
-        </Row> */}
       </Section>
+      </body>
     </Html>
   );
 }
