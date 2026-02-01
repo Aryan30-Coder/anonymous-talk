@@ -27,7 +27,7 @@ export async function POST(request: Request){
             if(existingUserByEmail.isVerified){
                 return Response.json({
                     success: false,
-                    message: "User is already exist with this email!"
+                    message: "User already exist with this email!"
                 }, {status: 400})
             }
             else{
@@ -74,7 +74,7 @@ export async function POST(request: Request){
         return Response.json({
                 success: true,
                 message: "User registered successfully! Please verify your email."
-            }, {status: 400})
+            }, {status: 200})
 
     } catch (error) {
         console.error('Error registering user', error)
