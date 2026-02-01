@@ -5,19 +5,16 @@ export async function GET(request: Request){
     await dbConnect();
 
     try {
-        const {searchParams} = new URL(request.url)
-        const {username, code} = {
-            username: searchParams.get('username'),
-            code: searchParams.get('code')
-        }
+        const {username, code} = await request.json()
+        const decodedUsername = decodeURIComponent(username)
 
-        const user = await UserModel.findOne({username});
+        const user = await UserModel.findOne({username: decodedUsername });
 
         if(!user){
             console.error("User doesnt exist!");
             return Response.json(
                 {
-                    success: "false",
+                    success: false,
                     message: "User doesnt exist!"
                 }, { status: 500}
             )
@@ -32,21 +29,21 @@ export async function GET(request: Request){
 
             return Response.json(
                 {
-                    success: "true",
+                    success: true,
                     message: "User verified!"
                 }, { status: 200}
             )
         }else if(!isCodeValid){
             return Response.json(
                 {
-                    success: "false",
+                    success: false,
                     message: "Error verifying code! "
                 }, { status: 400}
             )
         }else{
             return Response.json(
                 {
-                    success: "false",
+                    success: false,
                     message: "Code is expired! Please sign-up again to generate a new code."
                 }, { status: 400}
             )
@@ -58,7 +55,7 @@ export async function GET(request: Request){
         console.error("Error verifying code: ", error);
         return Response.json(
             {
-                success: "false",
+                success: false,
                 message: "Error verifying code", error
             }, { status: 500}
         )
