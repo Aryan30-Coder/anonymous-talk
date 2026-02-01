@@ -18,7 +18,7 @@ export async function POST() {
     `;
 
     const result = streamText({
-      model: groq("llama-3.1-70b-versatile"),
+      model: groq("llama-3.1-8b-instant"),
       prompt,
       maxOutputTokens: 400
     });
