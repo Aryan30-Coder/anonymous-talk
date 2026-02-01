@@ -1,7 +1,7 @@
 import UserModel from "@/models/User.model";
 import dbConnect from "@/lib/dbConnect";
 
-export async function GET(request: Request){
+export async function POST(request: Request){
     await dbConnect();
 
     try {
