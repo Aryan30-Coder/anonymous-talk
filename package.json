@@ -9,10 +9,13 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ai-sdk/groq": "^3.0.21",
     "@react-email/components": "^1.0.6",
     "@react-email/render": "^2.0.4",
+    "ai": "^6.0.67",
     "autoprefixer": "^10.4.23",
     "bcryptjs": "^3.0.3",
+    "groq": "^5.7.0",
     "mongoose": "^9.1.5",
     "next": "16.1.6",
     "next-auth": "^4.24.13",
