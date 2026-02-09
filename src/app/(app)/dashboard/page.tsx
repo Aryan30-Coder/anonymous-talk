@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useCallback, useEffect, useState } from "react"
 import { Message } from '@/models/User.model'
@@ -99,9 +99,17 @@ const pages = () => {
   }
   
 
-  const {username} = session?.user as User || "undefined"
-  const baseUrl = `${window.location.protocol}/${window.location.host}`
-  const profileUrl = `${baseUrl}/u/${username}`
+  const { username } = (session?.user as User) || { username: "undefined" };
+
+  const [profileUrl, setProfileUrl] = useState<string>("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const baseUrl = `${window.location.protocol}//${window.location.host}`;
+      setProfileUrl(`${baseUrl}/u/${username}`);
+    }
+  }, [username]);
+
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(profileUrl)
