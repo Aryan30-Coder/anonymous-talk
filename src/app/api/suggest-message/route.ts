@@ -23,6 +23,8 @@ export async function POST() {
       maxOutputTokens: 400
     });
 
+    console.log(result);
+
     return result.toUIMessageStreamResponse();
 
   } catch (error) {

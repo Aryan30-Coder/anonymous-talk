@@ -16,12 +16,15 @@ import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
 import { User } from "next-auth"
 import { Input } from "@/components/ui/input"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 const pages = () => {
 
   const[messages, setMessages] = useState<Message[]>([])
   const[isLoading, setIsLoading] = useState(false)
   const[isSwitchLoading, setIsSwitchLoading] = useState(false)
+  const router = useRouter()
 
   const handleDeleteMessage = (messageId: string) => {
     setMessages(messages.filter((message) => message._id.toString() !== messageId))
@@ -56,7 +59,7 @@ const pages = () => {
     setIsSwitchLoading(false)
 
     try {
-      const response = await axios.get<ApiResponse>('/api/get-messages')
+      const response = await axios.get<ApiResponse>('/api/get-message')
       setMessages(response.data.messages || [])
 
       if(refresh){
@@ -97,13 +100,14 @@ const pages = () => {
   }
   
 
-  const {username} = session?.user as User
+  const {username} = session?.user as User || "undefined"
   const baseUrl = `${window.location.protocol}/${window.location.host}`
   const profileUrl = `${baseUrl}/u/${username}`
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(profileUrl)
     toast.success("Prifle url copied to clipboard!")
+    router.push(`/u/${username}`)
   }
 
   if(!session || !session.user){
