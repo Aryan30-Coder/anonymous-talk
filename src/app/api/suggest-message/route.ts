@@ -3,7 +3,7 @@ import { groq } from "@ai-sdk/groq";
 
 export const runtime = "edge";
 
-export async function POST() {
+export async function GET() {
   try {
     const prompt = `
     Create a list of three open-ended and engaging questions formatted as a single string.
@@ -22,8 +22,6 @@ export async function POST() {
       prompt,
       maxOutputTokens: 400
     });
-
-    console.log(result);
 
     return result.toUIMessageStreamResponse();
 

@@ -9,11 +9,13 @@ import { User } from "next-auth"
 import axios from 'axios'
 import { toast } from 'sonner'
 import { ApiResponse } from '@/types/ApiResponse'
+import { TypeOf } from 'zod/v3'
+import { startsWith } from 'zod'
 
 
 const page = () => {
-  const [message, setMessage] = useState('')
-  const [suggestions, setSugestions] = useState([]);
+  const [message, setMessage] = useState<string>('')
+  const [suggestions, setSugestions] = useState<string[]>([]);
 
   const {data: session} = useSession()
   const {username} = session?.user as User || "Undefined"
@@ -33,18 +35,61 @@ const page = () => {
     }
   }
 
+  function extractAndParseQuestions(raw: string) {
+  
+    const match = raw.match(/"([\s\S]*?)"/);
+
+    if (!match) return []; 
+
+    const questionString = match[1]; 
+
+    return questionString
+      .replace(/\n+/g, " ")   
+      .trim()
+      .split("||")
+      .map(q => q.trim())
+      .filter(Boolean);
+  }
+
+
   const suggestMessagesHandler = async () => {
     try {
-      
-      const response = await axios.get<ApiResponse>('/api/suggest-message')
-      console.log(response?.data)
+      const response = await fetch('/api/suggest-message')
 
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
 
+      let rawText = ""
+
+      while(true){
+        const { done, value } = await reader!.read();
+        if(done) break;
+
+        const chunk = decoder.decode(value, {stream: true})
+
+        const lines = chunk.split('\n')
+
+        for(const line of lines){
+          if(line.startsWith("data: ")){
+            const json = JSON.parse(line.replace("data: ", ""))
+
+            if(json.type === "text-delta"){
+              rawText += json.delta
+            }
+
+            if(json.type === "finish"){
+              const messages = extractAndParseQuestions(rawText)
+              setSugestions(messages)
+            }
+          }
+        }
+
+      }
     } catch (error) {
-      console.error("Error while getting suggestions: ", error)
-      toast.error("Could not get suggestions!")
+      console.error("Error while getting suggestion: ", suggestions)
     }
   }
+
 
   return (
     <div>
@@ -64,9 +109,25 @@ const page = () => {
         <Button onClick={suggestMessagesHandler}> Suggest messages</Button>
         <p className='mt-5'>Click on any message below to select it.</p>
       </div>
-      <div className='w-[50%] h-96 border border-gray-300 bg-white rounded ml-[25%] mt-5'>
-        <h5 className='m-3'>Messages</h5>
-      </div>
+      <div className="w-[50%] h-96 border border-gray-300 bg-white rounded ml-[25%] mt-5 p-3 overflow-y-auto">
+      <h5 className="mb-3 font-semibold">Messages</h5>
+
+      {suggestions.length === 0 ? (
+        <p className="text-gray-400">No suggestions yet. Click “Suggest messages”.</p>
+      ) : (
+        <div className="grid gap-3">
+          {suggestions.map((msg, i) => (
+            <div
+              key={i}
+              className="border p-3 rounded cursor-pointer hover:bg-gray-100 transition"
+              onClick={() => setMessage(msg)}   
+            >
+              {msg}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
     </div>
   )
 }
