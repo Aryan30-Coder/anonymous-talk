@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
@@ -9,8 +9,6 @@ import { User } from "next-auth"
 import axios from 'axios'
 import { toast } from 'sonner'
 import { ApiResponse } from '@/types/ApiResponse'
-import { TypeOf } from 'zod/v3'
-import { startsWith } from 'zod'
 
 
 const page = () => {

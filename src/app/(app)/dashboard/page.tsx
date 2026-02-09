@@ -16,7 +16,6 @@ import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
 import { User } from "next-auth"
 import { Input } from "@/components/ui/input"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 const pages = () => {
