@@ -8,6 +8,8 @@ RUN npm install
 
 COPY . .
 
+ENV RESEND_API_KEY="dummy_key_for_build"
+
 RUN npm run build
 
 # ---- Production Stage ----
