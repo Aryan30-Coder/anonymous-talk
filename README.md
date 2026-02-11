@@ -59,42 +59,49 @@ anonymous-talk/
 
 - **Home Page:**  
   The landing page shown to users who are not logged in. New users can navigate to the authentication flow via the Login option.  
+
   ![Home UI](./assets/home-ui.png)
 
 ---
 
 - **Signup Page:**  
   Allows new users to create an account by providing the required credentials.  
+
   ![Signup UI](./assets/signup-ui.png)
 
 ---
 
 - **Login Page:**  
   Enables existing users to securely access their accounts.  
+
   ![Login UI](./assets/login-ui.png)
 
 ---
 
 - **Profile Dashboard:**  
   A personalized user dashboard where users can view all anonymous messages received.  
+
   ![Dashboard UI](./assets/dashboard-ui.png)
 
 ---
 
 - **Send Message Interface:**  
   A dedicated page that allows users to send messages to others anonymously via a unique profile link.  
+
   ![Send Message UI](./assets/send-message-ui.png)
 
 ---
 
 - **Suggested Messages View:**  
   Displays pre-generated message suggestions to help users compose messages quickly.  
+
   ![Suggestions UI](./assets/send-msg-with-suggestion-ui.png)
 
 ---
 
 - **Suggestion Selection Interaction:**  
   When a user selects a suggested message, it is automatically populated into the text area for editing or sending.  
+  
   ![Choose Suggestion UI](./assets/click-on-suggest-msg-ui.png)
 
 
