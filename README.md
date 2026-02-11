@@ -58,7 +58,15 @@ anonymous-talk/
 ## Demo
 
 ### Anonymous Talk Dashboard
+
+![Home UI](./assets/home-ui.png)
+![Signup UI](./assets/signup-ui.png)
+![Login UI](./assets/login-ui.png)
 ![Dashboard UI](./assets/dashboard-ui.png)
+![Send Message UI](./assets/send-message-ui.png)
+![Suggestions UI](./assets/send-msg-with-suggestion-ui.png)
+![Choose Suggestion UI](./assets/click-on-suggest-msg-ui.png)
+
 
 
 ### Installation
