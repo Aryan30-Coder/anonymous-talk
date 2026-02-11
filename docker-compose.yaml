@@ -5,7 +5,8 @@ services:
     build: .
     container_name: nextjs-dev
     ports:
-      - "3000:3000"
+      # exposing the port 8080 in dockerfile
+      - "3000:8080" 
     volumes:
       - .:/app
       - /app/node_modules
