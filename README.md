@@ -56,18 +56,27 @@ anonymous-talk/
 | Google Cloud Platform | Deployment |
 
 ## Demo
-
-### Anonymous Talk Dashboard
-
+- Home Page 
 ![Home UI](./assets/home-ui.png)
+---
+- Signup Page
 ![Signup UI](./assets/signup-ui.png)
+---
+- Login Page
 ![Login UI](./assets/login-ui.png)
+---
+- Profile Dashboard
 ![Dashboard UI](./assets/dashboard-ui.png)
+---
+- UI for sending Message
 ![Send Message UI](./assets/send-message-ui.png)
+---
+- UI when you click on suggest Message
 ![Suggestions UI](./assets/send-msg-with-suggestion-ui.png)
+---
+-UI when you click on any message from suggestions
 ![Choose Suggestion UI](./assets/click-on-suggest-msg-ui.png)
-
-
+---
 
 ### Installation
 
